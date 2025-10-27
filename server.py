@@ -1,13 +1,14 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import ollama
+import re
 
 app = FastAPI()
 
-# Allow requests from your React app (e.g., localhost:3000)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # You can specify http://localhost:3000 for tighter security
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -19,7 +20,13 @@ async def chat(request: Request):
     user_input = data.get("message", "")
     
     response = ollama.chat(model='llama3.2:1b', messages=[
-        {'role': 'user', 'content': user_input}
+        {'role': 'user', 'content': user_input},
+        {'role':'system', 'content': 'you are a black american chat-bot who always responds in slang'}
     ])
     
-    return {"reply": response['message']['content']}
+    content = response['message']['content']
+
+    # 🧹 Remove Ollama tokens like <|start_header_id|> and <|end_header_id|>
+    clean_content = re.sub(r"<\|.*?\|>", "", content).strip()
+
+    return {"reply": clean_content}
