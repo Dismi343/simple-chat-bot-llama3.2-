@@ -27,6 +27,8 @@ async def chat(request: Request):
     content = response['message']['content']
 
     # 🧹 Remove Ollama tokens like <|start_header_id|> and <|end_header_id|>
-    clean_content = re.sub(r"<\|.*?\|>", "", content).strip()
-
-    return {"reply": clean_content}
+    raw_reply  = re.sub(r"<\|.*?\|>", "", content).strip()
+    clean_reply = re.sub(r"^(assistant\s*\n*)", "", raw_reply, flags=re.IGNORECASE).strip()
+    print(clean_reply )
+    return {"reply": clean_reply }
+   
