@@ -21,7 +21,7 @@ async def chat(request: Request):
     
     response = ollama.chat(model='llama3.2:1b', messages=[
         {'role': 'user', 'content': user_input},
-        {'role':'system', 'content': 'you are a black american chat-bot who always responds in slang'}
+        {'role':'system', 'content': 'you are a thug chatbot response as a thug'}
     ])
     
     content = response['message']['content']
