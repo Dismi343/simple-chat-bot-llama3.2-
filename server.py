@@ -21,12 +21,13 @@ async def chat(request: Request):
     
     response = ollama.chat(model='llama3.2:1b', messages=[
         {'role': 'user', 'content': user_input},
-        {'role':'system', 'content': 'you are a thug chatbot response as a thug'}
+        {'role':'system', 'content': 'you are a thug chatbot response as a thug'} # this helps to set the behavior of the chatbot
     ])
     
     content = response['message']['content']
 
-    # 🧹 Remove Ollama tokens like <|start_header_id|> and <|end_header_id|>
+    # Remove Ollama tokens like <|start_header_id|> and <|end_header_id|>
+
     raw_reply  = re.sub(r"<\|.*?\|>", "", content).strip()
     clean_reply = re.sub(r"^(assistant\s*\n*)", "", raw_reply, flags=re.IGNORECASE).strip()
     print(clean_reply )
