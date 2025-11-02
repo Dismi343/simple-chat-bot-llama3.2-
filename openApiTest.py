@@ -14,7 +14,7 @@ mime_type = mimetypes.guess_type(image_name)[0] or "image/jpeg"
 
 client = OpenAI(
   base_url="https://openrouter.ai/api/v1",
-  api_key="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",
+  api_key="<replace_with_your_openrouter_api_key>",
 )
 
 completion = client.chat.completions.create(
@@ -52,4 +52,3 @@ else:
 
 
 
-#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
