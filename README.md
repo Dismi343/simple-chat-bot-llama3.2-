@@ -26,3 +26,15 @@ Download ollama,
   ollama list
 ```
   and check whether llama3.2:1b installed correctly
+
+  ## OCR - pytesseract for reading text
+  ```bash
+    python textReader.py
+  ```
+Using a model from OpenRouter
+
+replace your API_key before run
+
+```bash
+   python openApiTest.py
+```
