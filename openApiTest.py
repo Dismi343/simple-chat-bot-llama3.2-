@@ -2,7 +2,8 @@ from openai import OpenAI
 import base64
 import mimetypes
 from PIL import Image
-
+from dotenv import load_dotenv
+import os
 
 image_name = str(input("Enter image name.exe: "))
 
@@ -12,9 +13,11 @@ with open(image_name, "rb") as f:
 
 mime_type = mimetypes.guess_type(image_name)[0] or "image/jpeg"
 
+load_dotenv() 
+
 client = OpenAI(
   base_url="https://openrouter.ai/api/v1",
-  api_key="<replace_with_your_openrouter_api_key>",
+  api_key=os.getenv("API_KEY"),
 )
 
 completion = client.chat.completions.create(
