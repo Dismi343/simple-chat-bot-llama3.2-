@@ -28,6 +28,10 @@ Download ollama,
   and check whether llama3.2:1b installed correctly
 
   ## OCR - pytesseract for reading text
+  install
+  ```bash
+    pip install pytesseract
+  ```
   ```bash
     python textReader.py
   ```
